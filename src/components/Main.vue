@@ -32,8 +32,6 @@
                 .catch(reason => console.error(reason))
         }, methods:{
             getToDetails: function (event) {
-                // eslint-disable-next-line no-console
-            console.log(event.target.id)
                 this.$router.push(event.target.id)
 
                 
