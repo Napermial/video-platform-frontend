@@ -1,31 +1,41 @@
 <template>
     <div class="main">
-        <div v-if="list">
-            <div v-for="elem of list" v-bind:key='elem'>
-                <h2 v-on:click="getToDetails">{{elem.title}}</h2>
-                <ul>{{elem.id}}</ul>
+        <h1>BEST FREE VIDEOS click below</h1>
+<!--        <div v-if="this-list!=null" >-->
+            <div v-for="elem in list" v-bind:key='elem.id'>
+                <h2 :id="elem.id" v-on:click="getToDetails">{{elem.name}}</h2>
+                <h3 >{{elem.id}}</h3>
             </div>
-        </div>
+<!--        </div>-->
     </div>
 </template>
 
 <script>
+
     export default {
         name: "Main",
-        data() {
+        data: function () {
             return {
-                list:null
+                list: []
             }
         },
-        mounted() {
-            fetch('http://localhost:8080/video/list')
-                .then(resp => this.list = resp.data)
+        beforeMount() {
+            fetch('http://localhost:8762/video/list')
+                .then(res => res.json())
+                .then(res => this.$data.list = res)
+                .finally(r => {
+                    r;
+                    // eslint-disable-next-line no-console
+                console.log(this.$data);
+                })
                 // eslint-disable-next-line no-console
                 .catch(reason => console.error(reason))
         }, methods:{
             getToDetails: function (event) {
                 // eslint-disable-next-line no-console
-            console.log(event)
+            console.log(event.target.id)
+                this.$router.push(event.target.id)
+
                 
             }
         }

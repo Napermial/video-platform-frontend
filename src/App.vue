@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <router-view/>
   </div>
 </template>
 
@@ -8,6 +9,7 @@ import Main from './components/Main.vue'
 import Details from './components/Details'
 
 export default {
+
   name: 'app',
   components: {
     // eslint-disable-next-line vue/no-unused-components
